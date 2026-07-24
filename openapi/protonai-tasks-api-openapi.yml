@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Proton Call Notes Tasks API
+  version: 1.0.0
+  description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
+  contact:
+    name: Proton.ai
+    url: https://www.proton.ai/
+servers:
+- url: https://api.proton.ai
+  description: 'Production (tenant path: /{company}/...)'
+security:
+- ApiKeyAuth: []
+tags:
+- name: Tasks
+paths:
+  /{company}/edit/task:
+    post:
+      operationId: updateTask
+      summary: Update Task
+      tags:
+      - Tasks
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              task_id: 8e05aaaa-b955-4958-850d-f1b12c2496c9
+              completed: true
+              user_id:
+              - joe.doe@acme.com
+              requesting_user_id: protontestaccount@acme.com
+              title: Test task
+              due_date: '2023-10-15T22:00:00.000Z'
+              note: test
+              associations:
+              - type: customer
+                customer_id: 00531-01
+              - type: product
+                product_id: ABC-123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/create/task:
+    post:
+      operationId: createTask
+      summary: Create Task
+      tags:
+      - Tasks
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Static API key supplied by Proton at integration onboarding.

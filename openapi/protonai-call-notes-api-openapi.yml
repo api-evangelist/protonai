@@ -1,0 +1,259 @@
+openapi: 3.1.0
+info:
+  title: Proton Call Notes API
+  version: 1.0.0
+  description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
+  contact:
+    name: Proton.ai
+    url: https://www.proton.ai/
+servers:
+- url: https://api.proton.ai
+  description: 'Production (tenant path: /{company}/...)'
+security:
+- ApiKeyAuth: []
+tags:
+- name: Call Notes
+paths:
+  /{company}/v1/call_notes/search:
+    post:
+      operationId: searchCallNotesV1
+      summary: Search Call Notes V1
+      tags:
+      - Call Notes
+      description: 'Call Notes Search API v1
+
+        Overview
+
+        The Call Notes Search API v1 endpoint allows you to search for call notes within a specific company using a query string and advanced filtering options. This endpoint supports various search operators for flexible and precise call note searches. Call notes represent recorded interactions between sales representatives and customers, including notes, pitched products, and associated metadata.
+
+        Endpoint
+
+        Method: POSTURL: {{domain}}/{{company}}/v1/call-notes/search
+
+        Re'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/call_notes:
+    post:
+      operationId: createCallNoteV1
+      summary: Create Call Note V1
+      tags:
+      - Call Notes
+      description: 'Call Note Create API v1
+
+        Overview
+
+        The Call Note Create API v1 endpoint allows you to create a new call note for one or more customers within a specific company. The endpoint accepts call details, optional pitched items (products presented during the call), custom fields, associations (linked entities such as opportunities, quotes, orders, and campaigns), and file attachments. When multiple customers are specified, a separate call note is created for each customer, linked together via a shared cal'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/call_notes/{identifier}:
+    put:
+      operationId: editCallNoteV1
+      summary: Edit Call Note V1
+      tags:
+      - Call Notes
+      description: 'Call Note Edit API v1
+
+        Overview
+
+        The Call Note Edit API v1 endpoint allows you to update an existing call note by its identifier within a specific company. The endpoint accepts updated call details including notes text, call type, tagged users, custom fields, associations, and file attachments. Only the original creator of the call note can edit it. The response returns the updated call note with all current field values.
+
+        Endpoint
+
+        Method: PUT
+
+        URL: {{domain}}/{{company}}/v1/call_notes/{{identifier}'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      operationId: deleteCallNoteV1
+      summary: Delete Call Note V1
+      tags:
+      - Call Notes
+      description: 'Call Note Delete API v1
+
+        Overview
+
+        The Call Note Delete API v1 endpoint allows you to delete an existing call note by its identifier within a specific company. Deleting a call note permanently removes the call note record and all associated pitched items from the database. Associated files are soft-deleted, comments are soft-deleted, and interaction snapshots are created as an audit trail before deletion. Related entities (customers, contacts, opportunities, quotes, orders) have their last contact'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    get:
+      operationId: getCallNoteV1
+      summary: Get Call Note V1
+      tags:
+      - Call Notes
+      description: 'Call Note Get API v1
+
+        Overview
+
+        The Call Note Get API v1 endpoint allows you to retrieve a single call note by its identifier within a specific company. The endpoint returns comprehensive call note information including core call details, tagged users, custom fields, associations (linked entities such as opportunities, quotes, and files), customer information, and pitched items (products presented during the call). Call notes represent logged interactions between sales representatives and customer'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/create/interaction/call_note:
+    post:
+      operationId: createCallNote
+      summary: Create Call Note (LEGACY)
+      tags:
+      - Call Notes
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Static API key supplied by Proton at integration onboarding.

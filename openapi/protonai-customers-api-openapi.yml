@@ -1,0 +1,245 @@
+openapi: 3.1.0
+info:
+  title: Proton Call Notes Customers API
+  version: 1.0.0
+  description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
+  contact:
+    name: Proton.ai
+    url: https://www.proton.ai/
+servers:
+- url: https://api.proton.ai
+  description: 'Production (tenant path: /{company}/...)'
+security:
+- ApiKeyAuth: []
+tags:
+- name: Customers
+paths:
+  /{company}/v1/customers/{identifier}:
+    get:
+      operationId: getCustomer
+      summary: Get Customer
+      tags:
+      - Customers
+      description: 'Get Customer API v1
+
+        Overview
+
+        The Get Customer API v1 endpoint allows you to retrieve a single customer record by its business identifier or internal UUID. The response returns the full customer record including core fields, billing hierarchy, enriched representative and account group data, custom fields, and analytics. Customers represent the accounts your sales team sells to, including their identifying information, address details, contact info, and classification data.
+
+        Endpoint
+
+        Method: GETURL'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    patch:
+      operationId: updateCustomer
+      summary: Update Customer
+      tags:
+      - Customers
+      description: 'Update Customer API v1
+
+        Overview
+
+        The Update Customer API v1 endpoint allows you to partially update an existing customer record within a specific company. This endpoint uses PATCH semantics — only fields explicitly included in the request body are updated, while omitted fields remain unchanged. Fields sent with a null value are cleared. Customers represent the accounts your sales team sells to, including their identifying information, address details, contact info, and classification data.
+
+        Endpoi'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v2/customers/search:
+    post:
+      operationId: searchCustomersV2
+      summary: Search Customers V2
+      tags:
+      - Customers
+      description: 'Customer Search API v2
+
+        Overview
+
+        The Customer Search API v2 endpoint allows you to search for customers within a specific company using a query string and advanced filtering options. This endpoint supports various search operators for flexible and precise customer searches. Customers represent the accounts your sales team sells to, including their identifying information, address details, contact info, classification data, churn analytics, custom fields, and audit metadata.
+
+        Endpoint
+
+        Method: POSTU'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/customers:
+    post:
+      operationId: createCustomerV1
+      summary: Create Customer V1
+      tags:
+      - Customers
+      description: 'Create Customer API v1
+
+        Overview
+
+        The Create Customer API v1 endpoint allows you to create a new customer record within a specific company. Customers represent the accounts your sales team sells to, including their identifying information, address details, contact info, and classification data. The endpoint validates that the customer_id is unique within the company before creating the record.
+
+        Endpoint
+
+        Method: POSTURL: {{domain}}/{{company}}/v1/customers
+
+        Path Parameters
+
+
+
+
+        Parameter
+
+        Type
+
+        Required
+
+        '
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/customers/bulk:
+    post:
+      operationId: createCustomersBulkV1
+      summary: Create Customers Bulk V1
+      tags:
+      - Customers
+      description: 'Bulk Create Customers API v1
+
+        Overview
+
+        The Bulk Create Customers API v1 endpoint allows you to create multiple customer records in a single request within a specific company. The endpoint processes each item independently — valid items succeed even if others fail, providing per-item error reporting. Customers represent the accounts your sales team sells to, including their identifying information, address details, contact info, and classification data.
+
+        Endpoint
+
+        Method: POST
+
+        URL: {{domain}}/{{comp'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Static API key supplied by Proton at integration onboarding.

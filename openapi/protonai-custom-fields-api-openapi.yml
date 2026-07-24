@@ -1,0 +1,247 @@
+openapi: 3.1.0
+info:
+  title: Proton Call Notes Custom Fields API
+  version: 1.0.0
+  description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
+  contact:
+    name: Proton.ai
+    url: https://www.proton.ai/
+servers:
+- url: https://api.proton.ai
+  description: 'Production (tenant path: /{company}/...)'
+security:
+- ApiKeyAuth: []
+tags:
+- name: Custom Fields
+paths:
+  /{company}/custom_field/create:
+    post:
+      operationId: addNewCustomField
+      summary: Add new custom field
+      tags:
+      - Custom Fields
+      description: field_id is optional. If left out, the system will generate a globally unique field_id for you.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              display_name: Good Dancer?
+              display_description: Summary judgement on the individual's musical aptitude
+              field_type: dropdown
+              options:
+              - 'Yes'
+              - 'No'
+              - Depends on the music
+              required: true
+              record_types:
+              - opportunity
+              editability:
+              - admin
+              visibility:
+              - admin
+              - manager
+              config:
+                opportunity__pipeline_id: some_pipeline_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/custom_field/delete:
+    post:
+      operationId: deleteACustomField
+      summary: Delete a custom field
+      tags:
+      - Custom Fields
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              custom_field_id: custom_usesi_jm_awarded_date
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/custom_field/edit:
+    put:
+      operationId: editACustomFieldConfiguration
+      summary: Edit a custom field configuration
+      tags:
+      - Custom Fields
+      description: 'field_id is required. Every other parameter is optional*.
+
+        *If you change the custom field''s type to dropdown, then options will also be a required parameter.'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              custom_field_id: test percentage
+              display_name: Probability%
+              display_description: ''
+              field_type: percentage
+              lookup_target: null
+              required: true
+              display_order: 800
+              record_types:
+              - opportunity
+              editability:
+              - all
+              visibility:
+              - all
+              is_ingested: false
+              conditional_logic: null
+              config:
+                opportunity__pipeline_id: QN3iL5Y7zyrvDJXFQjPJva
+              group: null
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/custom_field/all:
+    get:
+      operationId: getAllCustomFields
+      summary: Get all custom fields
+      tags:
+      - Custom Fields
+      description: To retrieve all custom fields, remove record_types from the URL.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/custom_field/update_instance:
+    put:
+      operationId: updateACustomFieldInstance
+      summary: Update a custom field instance
+      tags:
+      - Custom Fields
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              record_type: contact
+              record_id: '125246'
+              custom_field_id: '1234'
+              value: Slide like a lizard
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Static API key supplied by Proton at integration onboarding.

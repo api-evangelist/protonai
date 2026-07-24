@@ -1,0 +1,298 @@
+openapi: 3.1.0
+info:
+  title: Proton Call Notes Recommendations API
+  version: 1.0.0
+  description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
+  contact:
+    name: Proton.ai
+    url: https://www.proton.ai/
+servers:
+- url: https://api.proton.ai
+  description: 'Production (tenant path: /{company}/...)'
+security:
+- ApiKeyAuth: []
+tags:
+- name: Recommendations
+paths:
+  /{company}/product/recommendations/cart_lite:
+    get:
+      operationId: completeCartRecommendations
+      summary: (Light) Complete Cart Recommendations
+      tags:
+      - Recommendations
+      description: 'This is a different flavor of the same API as the other Complete Cart but the cart is inferred through tracking data. The API only supplies the identifier of the customer and Proton infers the cart based on the items that have been to track in the past 24h.
+
+        Usage is only suggested for use-cases where the explicit cart is not possible to fetch.'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations/periodic:
+    get:
+      operationId: reorderRecommendations
+      summary: Reorder Recommendations
+      tags:
+      - Recommendations
+      description: Recommends products this customer has purchased before and is due to order again. Proton uses purchasing patterns to prioritize products that the customer is most likely to reorder.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations:
+    get:
+      operationId: newRecommendations
+      summary: New Recommendations
+      tags:
+      - Recommendations
+      description: Recommends products this customer hasn’t ordered before (or recently) that could be a good fit for them. Proton looks at products purchased by similar customers to make these recommendations.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations/bought:
+    get:
+      operationId: boughtAlsoBought
+      summary: Bought Also Bought
+      tags:
+      - Recommendations
+      description: Recommends products that are often bought together with the input product. "People that Buy X also Buy Y"
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations/similar:
+    get:
+      operationId: similarItems
+      summary: Similar Items
+      tags:
+      - Recommendations
+      description: Recommends products that are similar to the input product. Proton uses Natural Language Processing (NLP) to match products that contain similar name, descriptions, specifications etc.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations/recent:
+    get:
+      operationId: recentlyViewedRecommendations
+      summary: Recently Viewed Recommendations
+      tags:
+      - Recommendations
+      description: Shows products that the account has recently visited. This recommendation is powered through the Track - Product View Tracking API. No logic/AI is involved in this recommendation.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations/cart:
+    post:
+      operationId: completeCartRecommendations2
+      summary: Complete Cart Recommendations
+      tags:
+      - Recommendations
+      description: 'Recommends items that fit the cart. The model works by looking at all historical "carts" (based on order history) and tries to predict what products are "missing" from the current user''s cart.
+
+        Request Body definition (JSON)
+
+
+
+
+        Name
+
+        Description
+
+
+
+
+
+        customer_id
+
+        {{customer_id_description}}
+
+
+
+        user_id
+
+        {{user_id_description}}
+
+
+
+        count
+
+        {{count_description}}
+
+
+
+        products
+
+        An array of product objects with product_id and quantity that describes the list of products the user has in their cart.'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              customer_id: '{{customer_id}}'
+              user_id: '{{user_id}}'
+              count: '{{count}}'
+              products:
+              - product_id: '{{product_id}}'
+                quantity: '869'
+              - product_id: '{{product_id2}}'
+                quantity: '469'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Static API key supplied by Proton at integration onboarding.

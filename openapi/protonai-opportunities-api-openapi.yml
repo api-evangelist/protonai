@@ -1,0 +1,411 @@
+openapi: 3.1.0
+info:
+  title: Proton Call Notes Opportunities API
+  version: 1.0.0
+  description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
+  contact:
+    name: Proton.ai
+    url: https://www.proton.ai/
+servers:
+- url: https://api.proton.ai
+  description: 'Production (tenant path: /{company}/...)'
+security:
+- ApiKeyAuth: []
+tags:
+- name: Opportunities
+paths:
+  /{company}/opportunities:
+    post:
+      operationId: createOpportunity
+      summary: Create Opportunity
+      tags:
+      - Opportunities
+      description: 'We think of an opportunity which could be in serveral possible discreet stages as defined initially.
+
+        Request Body fields
+
+
+        pipeline_id: The uid of the pipline in which this opportunity gets created.
+
+        stage_id: The id of the stage in which this opportunity is created.
+
+        title : Title of the opportunity
+
+        owner : List of user ids (generally emails) for the owners of the opportunities
+
+        customer_id : Customer or Account id for which this opportunity is meant to be
+
+        contact_id: The id of the contact associat'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/opportunities/{opportunity_id}:
+    get:
+      operationId: getOpportunity
+      summary: Get Opportunity
+      tags:
+      - Opportunities
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: opportunity_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    patch:
+      operationId: updateOpportunity
+      summary: Update Opportunity
+      tags:
+      - Opportunities
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: opportunity_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      operationId: deleteOpportunity
+      summary: Delete Opportunity
+      tags:
+      - Opportunities
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: opportunity_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/opportunities/{opportunity_id}/activity_feed:
+    get:
+      operationId: getOpportunityActivityFeed
+      summary: Get Opportunity Activity Feed
+      tags:
+      - Opportunities
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: opportunity_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/opportunities/search:
+    post:
+      operationId: searchOpportunities
+      summary: Search Opportunities
+      tags:
+      - Opportunities
+      description: 'The search route allows users to query opportunities based on various attributes using a structured filtering syntax. Each attribute can be filtered using specific operators that act on the values of the fields within an opportunity. The operators define conditions such as equality, inequality, containment, and comparisons.
+
+        Constructing Queries
+
+        Query Syntax
+
+        Queries are constructed as JSON objects where each key corresponds to an opportunity attribute, and the value is another JSON object specify'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/pipelines/{pipeline_id}/export:
+    post:
+      operationId: exportOpportunities
+      summary: Export Opportunities
+      tags:
+      - Opportunities
+      description: 'The search route allows users to query opportunities based on various attributes using a structured filtering syntax. Each attribute can be filtered using specific operators that act on the values of the fields within an opportunity. The operators define conditions such as equality, inequality, containment, and comparisons.
+
+        Constructing Queries
+
+        Query Syntax
+
+        Queries are constructed as JSON objects where each key corresponds to an opportunity attribute, and the value is another JSON object specify'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/pipelines/{pipeline_id}/metrics:
+    post:
+      operationId: calculatePipelineMetrics
+      summary: Calculate Pipeline Metrics
+      tags:
+      - Opportunities
+      description: 'Given a search query (like the /search endpoint), this API endpoint calculates and returns the total count, total value, and forecasted value of opportunities within a specific pipeline and satisfying the search query. The calculation takes into account the stages of opportunities and their respective probabilities of closing.
+
+
+        Total Count: The aggregate number of opportunities within the pipeline.
+
+        Total Value: The total financial value of the pipeline.
+
+        Forecast Value: A predictive metric estima'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/pipelines/metrics:
+    post:
+      operationId: calculatePipelineMetricsAll
+      summary: Calculate Pipeline Metrics All
+      tags:
+      - Opportunities
+      description: 'Given a search query (like the /search endpoint), this API endpoint calculates and returns the total count, total value, and forecasted value of opportunities for all pipelines and satisfying the search query. The calculation takes into account the stages of opportunities and their respective probabilities of closing. A pipeline_id filter can be added to narrow the results.
+
+
+        Total Count: The aggregate number of opportunities within the pipeline.
+
+
+        Total Value: The total financial value of the pip'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/pipelines/{pipeline_id}/mock_users:
+    get:
+      operationId: getPipelineMockableUsers
+      summary: Get Pipeline Mockable Users
+      tags:
+      - Opportunities
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Static API key supplied by Proton at integration onboarding.

@@ -1,0 +1,119 @@
+openapi: 3.1.0
+info:
+  title: Proton Call Notes Tracking API
+  version: 1.0.0
+  description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
+  contact:
+    name: Proton.ai
+    url: https://www.proton.ai/
+servers:
+- url: https://api.proton.ai
+  description: 'Production (tenant path: /{company}/...)'
+security:
+- ApiKeyAuth: []
+tags:
+- name: Tracking
+paths:
+  /{company}/track:
+    post:
+      operationId: trackProductSearch
+      summary: Track - Product Search
+      tags:
+      - Tracking
+      description: 'Registers an event when a user submits a search query.
+
+        Usercase:
+
+
+        On https://shop.{{company}}.com customer "{{customer_id}}" searches for "red apples."'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              company: '{{company}}'
+              event: search
+              customer_id: '{{customer_id}}'
+              queryString: red apples
+              page_url: https://shop.distributorX.com/products/productID_123
+              page_type: productPage
+              page_referrer: https://shop.distributorX.com/cart
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/track/login:
+    post:
+      operationId: trackLogin
+      summary: Track - Login
+      tags:
+      - Tracking
+      description: 'Identifies a previously anonymous user.
+
+        Usercase:
+
+
+        On https://shop.{{company}}.com customer "{{customer_id2}}" logs in and gets assigned a new identifier "{{customer_id}}""'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              company: '{{company}}'
+              old_customer_id: '{{customer_id2}}'
+              new_customer_id: '{{customer_id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Static API key supplied by Proton at integration onboarding.

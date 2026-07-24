@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: Proton Call Notes Contacts API
+  version: 1.0.0
+  description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
+  contact:
+    name: Proton.ai
+    url: https://www.proton.ai/
+servers:
+- url: https://api.proton.ai
+  description: 'Production (tenant path: /{company}/...)'
+security:
+- ApiKeyAuth: []
+tags:
+- name: Contacts
+paths:
+  /{company}/v1/contacts/search:
+    post:
+      operationId: searchContactsV1
+      summary: Search Contacts V1
+      tags:
+      - Contacts
+      description: 'Contact Search API v1
+
+        Overview
+
+        The Contact Search API v1 endpoint allows you to search for contacts within a specific company using a query string and advanced filtering options. This endpoint supports various search operators for flexible and precise contact searches. Contacts represent individual people associated with customers, including their roles, contact information, custom fields, and audit metadata.
+
+        Endpoint
+
+        Method: POSTURL: {{domain}}/{{company}}/v1/contacts/search
+
+        Request Format
+
+        Requ'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/contacts:
+    post:
+      operationId: createContactV1
+      summary: Create Contact V1
+      tags:
+      - Contacts
+      description: 'Contact Create API v1
+
+        Overview
+
+        The Contact Create API v1 endpoint allows you to create a new contact within a specific company. Contacts represent individual people associated with one or more customers, including their roles, contact information, custom fields, and relationship details. This endpoint supports comprehensive contact information including multiple email addresses, phone numbers (with type and extension), custom fields, and multi-customer associations.
+
+        Endpoint
+
+        Method: POSTURL: {{d'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/contacts/{identifier}:
+    get:
+      operationId: getContactV1
+      summary: Get Contact V1
+      tags:
+      - Contacts
+      description: 'Contact Get API v1
+
+        Overview
+
+        The Contact Get API v1 endpoint allows you to retrieve a single contact by its identifier within a specific company. The endpoint returns comprehensive contact information including basic details, contact methods, customer associations, and activity counts (calls, emails, quotes, orders). Contacts represent individual people associated with customers, including their roles, contact information, and relationship details.
+
+        Endpoint
+
+        Method: GETURL: {{domain}}/{{company}}/'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      operationId: editContactV1
+      summary: Edit Contact V1
+      tags:
+      - Contacts
+      description: 'Contact Update API v1
+
+        Overview
+
+        The Contact Update API v1 endpoint allows you to edit an existing contact within a specific company. All editable fields are optional; only the fields you supply are updated, and the request must include at least one editable field. The endpoint also supports re-linking a contact to a different set of customers via customer_ids.
+
+        Endpoint
+
+        Method: PUTURL: {{domain}}/{{company}}/v1/contacts/{identifier}
+
+        Path Parameters
+
+
+
+
+        Parameter
+
+        Type
+
+        Required
+
+        Description
+
+
+
+
+
+        identi'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      operationId: deleteContactV1
+      summary: Delete Contact V1
+      tags:
+      - Contacts
+      description: 'Contact Delete API v1
+
+        Overview
+
+        The Contact Delete API v1 endpoint allows you to permanently delete a contact within a specific company. This endpoint performs a hard delete, physically removing the contact record from the database. The deletion is recorded in the audit trail for compliance and tracking purposes.
+
+        Endpoint
+
+        Method: DELETEURL: {{domain}}/{{company}}/v1/contacts/{{identifier}}
+
+        Request Format
+
+        URL Parameters
+
+
+
+
+        Parameter
+
+        Type
+
+        Required
+
+        Description
+
+
+
+
+
+        company
+
+        string
+
+        Yes
+
+        The company iden'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Static API key supplied by Proton at integration onboarding.

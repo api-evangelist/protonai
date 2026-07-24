@@ -1,0 +1,172 @@
+openapi: 3.1.0
+info:
+  title: Proton Call Notes Quotes API
+  version: 1.0.0
+  description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
+  contact:
+    name: Proton.ai
+    url: https://www.proton.ai/
+servers:
+- url: https://api.proton.ai
+  description: 'Production (tenant path: /{company}/...)'
+security:
+- ApiKeyAuth: []
+tags:
+- name: Quotes
+paths:
+  /{company}/quotes/{quote_id}:
+    get:
+      operationId: getQuoteV2
+      summary: Get Quote v2
+      tags:
+      - Quotes
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: quote_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    patch:
+      operationId: editQuote
+      summary: Edit Quote
+      tags:
+      - Quotes
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: quote_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              customer_id: cust-0
+              contact_id: cont-0
+              notes: test_notes
+              quote_lines:
+              - interaction_id: 123-00-001-quote
+                product_id: METCAL 123
+                quantity: 3
+                net_price: 196.6
+                list_price: 196.6
+                margin: 25.11
+                quote_status: open
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/quote_headers/{quote_id}:
+    get:
+      operationId: getQuoteHeader
+      summary: Get Quote Header
+      tags:
+      - Quotes
+      description: This endpoint allows clients to fetch detailed quote header information for specified quote IDs within a company. The response includes quote details, associated products, contacts, customer information, and calculated values such as realized and unrealized values.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: quote_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/quote_headers/search:
+    post:
+      operationId: searchQuotes
+      summary: Search Quotes
+      tags:
+      - Quotes
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Static API key supplied by Proton at integration onboarding.
