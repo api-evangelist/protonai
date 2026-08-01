@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+note: >-
+  Probed the well-known discovery surface on the website (www.proton.ai) and API
+  (api.proton.ai) hosts. The app host (app.proton.ai) is a Nuxt SPA that returns
+  HTTP 200 with HTML for ANY path (including nonsense), so its well-known "hits"
+  are false positives and are recorded as not-present. No real well-known
+  documents were found.
+hosts:
+  - host: https://www.proton.ai
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+  - host: https://api.proton.ai
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+  - host: https://app.proton.ai
+    note: SPA catch-all returns 200 for all paths; treated as no real well-known documents.

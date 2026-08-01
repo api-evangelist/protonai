@@ -1,0 +1,290 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/protonai-openapi.yml (derived from https://api.proton.ai/ Postman documentation)
+note: No official hosted Proton MCP server was found. This is a candidate tool list derived one-per-operation
+  from the Proton REST API; not published by Proton.
+server:
+  name: protonai
+  transport: stdio
+tools:
+- name: completeCartRecommendations
+  description: (Light) Complete Cart Recommendations
+  source_operation: openapi/protonai-openapi.yml#completeCartRecommendations
+  method: GET
+  group: Recommendations
+- name: reorderRecommendations
+  description: Reorder Recommendations
+  source_operation: openapi/protonai-openapi.yml#reorderRecommendations
+  method: GET
+  group: Recommendations
+- name: newRecommendations
+  description: New Recommendations
+  source_operation: openapi/protonai-openapi.yml#newRecommendations
+  method: GET
+  group: Recommendations
+- name: boughtAlsoBought
+  description: Bought Also Bought
+  source_operation: openapi/protonai-openapi.yml#boughtAlsoBought
+  method: GET
+  group: Recommendations
+- name: similarItems
+  description: Similar Items
+  source_operation: openapi/protonai-openapi.yml#similarItems
+  method: GET
+  group: Recommendations
+- name: recentlyViewedRecommendations
+  description: Recently Viewed Recommendations
+  source_operation: openapi/protonai-openapi.yml#recentlyViewedRecommendations
+  method: GET
+  group: Recommendations
+- name: completeCartRecommendations2
+  description: Complete Cart Recommendations
+  source_operation: openapi/protonai-openapi.yml#completeCartRecommendations2
+  method: POST
+  group: Recommendations
+- name: trackProductView
+  description: Track - Product View
+  source_operation: openapi/protonai-openapi.yml#trackProductView
+  method: POST
+  group: Tracking
+- name: trackProductClick
+  description: Track - Product Click
+  source_operation: openapi/protonai-openapi.yml#trackProductClick
+  method: POST
+  group: Tracking
+- name: trackProductClick2
+  description: Track - Product Click (recommended by Proton)
+  source_operation: openapi/protonai-openapi.yml#trackProductClick2
+  method: POST
+  group: Tracking
+- name: trackProductAddToCart
+  description: Track - Product Add-To-Cart
+  source_operation: openapi/protonai-openapi.yml#trackProductAddToCart
+  method: POST
+  group: Tracking
+- name: trackProductAddToCart2
+  description: Track - Product Add-To-Cart (recommended by Proton)
+  source_operation: openapi/protonai-openapi.yml#trackProductAddToCart2
+  method: POST
+  group: Tracking
+- name: trackProductSearch
+  description: Track - Product Search
+  source_operation: openapi/protonai-openapi.yml#trackProductSearch
+  method: POST
+  group: Tracking
+- name: trackLogin
+  description: Track - Login
+  source_operation: openapi/protonai-openapi.yml#trackLogin
+  method: POST
+  group: Tracking
+- name: addNewCustomField
+  description: Add new custom field
+  source_operation: openapi/protonai-openapi.yml#addNewCustomField
+  method: POST
+  group: Custom Fields
+- name: deleteACustomField
+  description: Delete a custom field
+  source_operation: openapi/protonai-openapi.yml#deleteACustomField
+  method: POST
+  group: Custom Fields
+- name: editACustomFieldConfiguration
+  description: Edit a custom field configuration
+  source_operation: openapi/protonai-openapi.yml#editACustomFieldConfiguration
+  method: PUT
+  group: Custom Fields
+- name: getAllCustomFields
+  description: Get all custom fields
+  source_operation: openapi/protonai-openapi.yml#getAllCustomFields
+  method: GET
+  group: Custom Fields
+- name: updateACustomFieldInstance
+  description: Update a custom field instance
+  source_operation: openapi/protonai-openapi.yml#updateACustomFieldInstance
+  method: PUT
+  group: Custom Fields
+- name: createOpportunity
+  description: Create Opportunity
+  source_operation: openapi/protonai-openapi.yml#createOpportunity
+  method: POST
+  group: Opportunities
+- name: getOpportunity
+  description: Get Opportunity
+  source_operation: openapi/protonai-openapi.yml#getOpportunity
+  method: GET
+  group: Opportunities
+- name: updateOpportunity
+  description: Update Opportunity
+  source_operation: openapi/protonai-openapi.yml#updateOpportunity
+  method: PATCH
+  group: Opportunities
+- name: deleteOpportunity
+  description: Delete Opportunity
+  source_operation: openapi/protonai-openapi.yml#deleteOpportunity
+  method: DELETE
+  group: Opportunities
+- name: getOpportunityActivityFeed
+  description: Get Opportunity Activity Feed
+  source_operation: openapi/protonai-openapi.yml#getOpportunityActivityFeed
+  method: GET
+  group: Opportunities
+- name: searchOpportunities
+  description: Search Opportunities
+  source_operation: openapi/protonai-openapi.yml#searchOpportunities
+  method: POST
+  group: Opportunities
+- name: exportOpportunities
+  description: Export Opportunities
+  source_operation: openapi/protonai-openapi.yml#exportOpportunities
+  method: POST
+  group: Opportunities
+- name: calculatePipelineMetrics
+  description: Calculate Pipeline Metrics
+  source_operation: openapi/protonai-openapi.yml#calculatePipelineMetrics
+  method: POST
+  group: Opportunities
+- name: calculatePipelineMetricsAll
+  description: Calculate Pipeline Metrics All
+  source_operation: openapi/protonai-openapi.yml#calculatePipelineMetricsAll
+  method: POST
+  group: Opportunities
+- name: getPipelineMockableUsers
+  description: Get Pipeline Mockable Users
+  source_operation: openapi/protonai-openapi.yml#getPipelineMockableUsers
+  method: GET
+  group: Opportunities
+- name: getCustomer
+  description: Get Customer
+  source_operation: openapi/protonai-openapi.yml#getCustomer
+  method: GET
+  group: Customers
+- name: updateCustomer
+  description: Update Customer
+  source_operation: openapi/protonai-openapi.yml#updateCustomer
+  method: PATCH
+  group: Customers
+- name: searchCustomersV2
+  description: Search Customers V2
+  source_operation: openapi/protonai-openapi.yml#searchCustomersV2
+  method: POST
+  group: Customers
+- name: createCustomerV1
+  description: Create Customer V1
+  source_operation: openapi/protonai-openapi.yml#createCustomerV1
+  method: POST
+  group: Customers
+- name: createCustomersBulkV1
+  description: Create Customers Bulk V1
+  source_operation: openapi/protonai-openapi.yml#createCustomersBulkV1
+  method: POST
+  group: Customers
+- name: getQuoteV2
+  description: Get Quote v2
+  source_operation: openapi/protonai-openapi.yml#getQuoteV2
+  method: GET
+  group: Quotes
+- name: getQuoteHeader
+  description: Get Quote Header
+  source_operation: openapi/protonai-openapi.yml#getQuoteHeader
+  method: GET
+  group: Quotes
+- name: searchQuotes
+  description: Search Quotes
+  source_operation: openapi/protonai-openapi.yml#searchQuotes
+  method: POST
+  group: Quotes
+- name: editQuote
+  description: Edit Quote
+  source_operation: openapi/protonai-openapi.yml#editQuote
+  method: PATCH
+  group: Quotes
+- name: searchLeadsV1
+  description: Search Leads V1
+  source_operation: openapi/protonai-openapi.yml#searchLeadsV1
+  method: POST
+  group: Leads
+- name: getLeadStagesV1
+  description: Get Lead Stages V1
+  source_operation: openapi/protonai-openapi.yml#getLeadStagesV1
+  method: GET
+  group: Leads
+- name: createLeadV1
+  description: Create Lead V1
+  source_operation: openapi/protonai-openapi.yml#createLeadV1
+  method: POST
+  group: Leads
+- name: searchContactsV1
+  description: Search Contacts V1
+  source_operation: openapi/protonai-openapi.yml#searchContactsV1
+  method: POST
+  group: Contacts
+- name: createContactV1
+  description: Create Contact V1
+  source_operation: openapi/protonai-openapi.yml#createContactV1
+  method: POST
+  group: Contacts
+- name: getContactV1
+  description: Get Contact V1
+  source_operation: openapi/protonai-openapi.yml#getContactV1
+  method: GET
+  group: Contacts
+- name: editContactV1
+  description: Edit Contact V1
+  source_operation: openapi/protonai-openapi.yml#editContactV1
+  method: PUT
+  group: Contacts
+- name: deleteContactV1
+  description: Delete Contact V1
+  source_operation: openapi/protonai-openapi.yml#deleteContactV1
+  method: DELETE
+  group: Contacts
+- name: searchCallNotesV1
+  description: Search Call Notes V1
+  source_operation: openapi/protonai-openapi.yml#searchCallNotesV1
+  method: POST
+  group: Call Notes
+- name: createCallNoteV1
+  description: Create Call Note V1
+  source_operation: openapi/protonai-openapi.yml#createCallNoteV1
+  method: POST
+  group: Call Notes
+- name: editCallNoteV1
+  description: Edit Call Note V1
+  source_operation: openapi/protonai-openapi.yml#editCallNoteV1
+  method: PUT
+  group: Call Notes
+- name: deleteCallNoteV1
+  description: Delete Call Note V1
+  source_operation: openapi/protonai-openapi.yml#deleteCallNoteV1
+  method: DELETE
+  group: Call Notes
+- name: getCallNoteV1
+  description: Get Call Note V1
+  source_operation: openapi/protonai-openapi.yml#getCallNoteV1
+  method: GET
+  group: Call Notes
+- name: createCallNote
+  description: Create Call Note (LEGACY)
+  source_operation: openapi/protonai-openapi.yml#createCallNote
+  method: POST
+  group: Call Notes
+- name: updateTask
+  description: Update Task
+  source_operation: openapi/protonai-openapi.yml#updateTask
+  method: POST
+  group: Tasks
+- name: createTask
+  description: Create Task
+  source_operation: openapi/protonai-openapi.yml#createTask
+  method: POST
+  group: Tasks
+- name: getProductInitiatives
+  description: Get Product Initiatives
+  source_operation: openapi/protonai-openapi.yml#getProductInitiatives
+  method: GET
+  group: Product Initiatives
+- name: searchContactByPhoneV1
+  description: Search Contact by phone V1
+  source_operation: openapi/protonai-openapi.yml#searchContactByPhoneV1
+  method: GET
+  group: Search

@@ -1,0 +1,191 @@
+generated: '2026-07-20'
+method: derived
+source: example responses in https://api.proton.ai/ Postman documentation
+envelope:
+  shape: '{ "status_message": "SUCCESS", "data": { ... } }'
+  note: Most responses wrap the resource in a data object with a status_message; some v1 endpoints (contacts)
+    return the resource at the top level.
+entities:
+- name: CustomField
+  source_folder: Custom Fields
+  fields:
+  - custom_field_id
+  - display_name
+  - display_description
+  - field_type
+  - options
+  - required
+  - record_types
+  - editability
+  - visibility
+- name: Opportunity
+  source_folder: Opportunities
+  fields:
+  - opportunity_id
+  - pipeline_id
+  - stage_id
+  - title
+  - owner
+  - customer_id
+  - customer_info
+  - contact_id
+  - contact_info
+  - value
+  - closed
+  - created_by
+  - created_date
+  - created_from_sales_play
+  - last_stage_change_date
+  - last_updated_by
+  - last_update_date
+  - last_contact_date
+  - custom_fields
+  - associations
+  - groupings
+  - visibility_ids
+  - is_deleted
+  - deleted_date
+  relationships:
+  - via: pipeline_id
+    kind: belongs_to
+    target: Pipeline
+  - via: stage_id
+    kind: belongs_to
+    target: Stage
+  - via: owner
+    kind: belongs_to
+    target: User
+  - via: customer_id
+    kind: belongs_to
+    target: Customer
+  - via: contact_id
+    kind: belongs_to
+    target: Contact
+  - via: created_by
+    kind: belongs_to
+    target: User
+  - via: last_updated_by
+    kind: belongs_to
+    target: User
+- name: Customer
+  source_folder: Customers
+  fields:
+  - customer_id
+  - id
+  - name
+  - bill_to_id
+  - is_bill_to
+  - street_address
+  - street_address_2
+  - city
+  - state
+  - zip_code
+  - country
+  - region
+  - branch
+  - location
+  - coordinate
+  - email
+  - office_phone_number
+  - fax_number
+  - is_active
+  - type
+  - source
+  - representative_ids
+  - representatives
+  - visibility_ids
+  - account_groups
+  - bill_to
+  - ship_tos
+  - parent_customer_id
+  - account_type
+  - parent
+  - children
+  - custom_fields
+  - notepad
+  - last_contact_date
+  - last_purchase_date
+  - last_ingested_date
+  - total_spending
+  - y2d_spending
+  - last_year_spending
+  - previous_year_spending
+  relationships:
+  - via: lead_id
+    kind: belongs_to
+    target: Lead
+- name: Quote
+  source_folder: Quotes
+  fields:
+  - quote_id
+  - bill_to_id
+  - customer_id
+  - expiration_date
+  - last_ingested_date
+  - last_contact_date
+  - associations
+  - contact_id
+  - contact_name
+  - contact_email
+  - status_last_modified
+  - status_erp
+  - status_rep
+  - status
+  - n_days_from_quote_to_order
+  - total_value
+  - remaining_value
+  - realized_value
+  - num_quote_lines
+  - num_purchased_quote_lines
+  - source
+  - total_value_initial
+  - total_value_last_modified
+  - manufacturer
+  - quantity_total
+  - custom_fields
+  - created_date
+  - customer_name
+  - customer_is_active
+  - customer_info
+  - quote_lines
+  relationships:
+  - via: bill_to_id
+    kind: belongs_to
+    target: Customer
+  - via: customer_id
+    kind: belongs_to
+    target: Customer
+  - via: contact_id
+    kind: belongs_to
+    target: Contact
+- name: Lead
+  source_folder: Leads
+  fields:
+  - message
+  - items
+  - total_count
+  - page_size
+  - page_number
+  - total_pages
+- name: Contact
+  source_folder: Contacts
+  fields:
+  - message
+  - items
+  - total_count
+  - page_size
+  - page_number
+  - total_pages
+- name: CallNote
+  source_folder: Call Notes
+  fields:
+  - message
+  - items
+  - total_count
+  - page_size
+  - page_number
+  - total_pages
+- name: Task
+  source_folder: Tasks
+  fields:
+  - task_id

@@ -1,0 +1,39 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/protonai-openapi.yml (envelope + example responses from https://api.proton.ai/)
+format: envelope
+note: >-
+  The Proton API does not use RFC 9457 problem+json. Successful responses use an
+  envelope of the shape { "status_message": "SUCCESS", "data": { ... } }. The
+  published Postman documentation ships only 2xx examples, so the error codes
+  below are the standard HTTP failures implied by an API-key-gated, tenant-scoped
+  REST API rather than a documented Proton error registry; titles/remediation are
+  generic until the provider publishes an error reference.
+envelope:
+  success_field: status_message
+  data_field: data
+problems:
+  - status: 400
+    title: Bad Request
+    detail: Request body or query parameters failed validation.
+    remediation: Check required fields and value formats against the operation schema.
+  - status: 401
+    title: Unauthorized
+    detail: Missing or invalid X-Api-Key header.
+    remediation: Supply the static API key issued by Proton in the X-Api-Key header.
+  - status: 403
+    title: Forbidden
+    detail: The API key is valid but not authorized for the requested company/resource.
+    remediation: Confirm the X-Company tenant slug matches the key's authorized scope.
+  - status: 404
+    title: Not Found
+    detail: The identified resource (customer, contact, opportunity, quote, lead, call note) does not exist.
+    remediation: Verify the path identifier and tenant.
+  - status: 429
+    title: Too Many Requests
+    detail: Rate limit exceeded (limit not published).
+    remediation: Back off and retry; contact Proton for documented limits.
+  - status: 500
+    title: Internal Server Error
+    detail: Unexpected server-side error.
+    remediation: Retry; if persistent, contact Proton support.

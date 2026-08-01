@@ -1,0 +1,2253 @@
+openapi: 3.1.0
+info:
+  title: Proton API
+  version: 1.0.0
+  description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and
+    CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B
+    distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the
+    start of an integration. Derived by API Evangelist from the provider's published public Postman documentation
+    at https://api.proton.ai/.
+  contact:
+    name: Proton.ai
+    url: https://www.proton.ai/
+servers:
+- url: https://api.proton.ai
+  description: 'Production (tenant path: /{company}/...)'
+security:
+- ApiKeyAuth: []
+tags:
+- name: Recommendations
+- name: Tracking
+- name: Custom Fields
+- name: Opportunities
+- name: Customers
+- name: Quotes
+- name: Leads
+- name: Contacts
+- name: Call Notes
+- name: Tasks
+- name: Product Initiatives
+- name: Search
+paths:
+  /{company}/product/recommendations/cart_lite:
+    get:
+      operationId: completeCartRecommendations
+      summary: (Light) Complete Cart Recommendations
+      tags:
+      - Recommendations
+      description: 'This is a different flavor of the same API as the other Complete Cart but the cart
+        is inferred through tracking data. The API only supplies the identifier of the customer and Proton
+        infers the cart based on the items that have been to track in the past 24h.
+
+        Usage is only suggested for use-cases where the explicit cart is not possible to fetch.'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations/periodic:
+    get:
+      operationId: reorderRecommendations
+      summary: Reorder Recommendations
+      tags:
+      - Recommendations
+      description: Recommends products this customer has purchased before and is due to order again. Proton
+        uses purchasing patterns to prioritize products that the customer is most likely to reorder.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations:
+    get:
+      operationId: newRecommendations
+      summary: New Recommendations
+      tags:
+      - Recommendations
+      description: Recommends products this customer hasn’t ordered before (or recently) that could be
+        a good fit for them. Proton looks at products purchased by similar customers to make these recommendations.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations/bought:
+    get:
+      operationId: boughtAlsoBought
+      summary: Bought Also Bought
+      tags:
+      - Recommendations
+      description: Recommends products that are often bought together with the input product. "People
+        that Buy X also Buy Y"
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations/similar:
+    get:
+      operationId: similarItems
+      summary: Similar Items
+      tags:
+      - Recommendations
+      description: Recommends products that are similar to the input product. Proton uses Natural Language
+        Processing (NLP) to match products that contain similar name, descriptions, specifications etc.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations/recent:
+    get:
+      operationId: recentlyViewedRecommendations
+      summary: Recently Viewed Recommendations
+      tags:
+      - Recommendations
+      description: Shows products that the account has recently visited. This recommendation is powered
+        through the Track - Product View Tracking API. No logic/AI is involved in this recommendation.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product/recommendations/cart:
+    post:
+      operationId: completeCartRecommendations2
+      summary: Complete Cart Recommendations
+      tags:
+      - Recommendations
+      description: 'Recommends items that fit the cart. The model works by looking at all historical "carts"
+        (based on order history) and tries to predict what products are "missing" from the current user''s
+        cart.
+
+        Request Body definition (JSON)
+
+
+
+
+        Name
+
+        Description
+
+
+
+
+
+        customer_id
+
+        {{customer_id_description}}
+
+
+
+        user_id
+
+        {{user_id_description}}
+
+
+
+        count
+
+        {{count_description}}
+
+
+
+        products
+
+        An array of product objects with product_id and quantity that describes the list of products the
+        user has in their cart.'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              customer_id: '{{customer_id}}'
+              user_id: '{{user_id}}'
+              count: '{{count}}'
+              products:
+              - product_id: '{{product_id}}'
+                quantity: '869'
+              - product_id: '{{product_id2}}'
+                quantity: '469'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/track:
+    post:
+      operationId: trackProductSearch
+      summary: Track - Product Search
+      tags:
+      - Tracking
+      description: 'Registers an event when a user submits a search query.
+
+        Usercase:
+
+
+        On https://shop.{{company}}.com customer "{{customer_id}}" searches for "red apples."'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              company: '{{company}}'
+              event: search
+              customer_id: '{{customer_id}}'
+              queryString: red apples
+              page_url: https://shop.distributorX.com/products/productID_123
+              page_type: productPage
+              page_referrer: https://shop.distributorX.com/cart
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/track/login:
+    post:
+      operationId: trackLogin
+      summary: Track - Login
+      tags:
+      - Tracking
+      description: 'Identifies a previously anonymous user.
+
+        Usercase:
+
+
+        On https://shop.{{company}}.com customer "{{customer_id2}}" logs in and gets assigned a new identifier
+        "{{customer_id}}""'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              company: '{{company}}'
+              old_customer_id: '{{customer_id2}}'
+              new_customer_id: '{{customer_id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/custom_field/create:
+    post:
+      operationId: addNewCustomField
+      summary: Add new custom field
+      tags:
+      - Custom Fields
+      description: field_id is optional. If left out, the system will generate a globally unique field_id
+        for you.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              display_name: Good Dancer?
+              display_description: Summary judgement on the individual's musical aptitude
+              field_type: dropdown
+              options:
+              - 'Yes'
+              - 'No'
+              - Depends on the music
+              required: true
+              record_types:
+              - opportunity
+              editability:
+              - admin
+              visibility:
+              - admin
+              - manager
+              config:
+                opportunity__pipeline_id: some_pipeline_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/custom_field/delete:
+    post:
+      operationId: deleteACustomField
+      summary: Delete a custom field
+      tags:
+      - Custom Fields
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              custom_field_id: custom_usesi_jm_awarded_date
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/custom_field/edit:
+    put:
+      operationId: editACustomFieldConfiguration
+      summary: Edit a custom field configuration
+      tags:
+      - Custom Fields
+      description: 'field_id is required. Every other parameter is optional*.
+
+        *If you change the custom field''s type to dropdown, then options will also be a required parameter.'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              custom_field_id: test percentage
+              display_name: Probability%
+              display_description: ''
+              field_type: percentage
+              lookup_target: null
+              required: true
+              display_order: 800
+              record_types:
+              - opportunity
+              editability:
+              - all
+              visibility:
+              - all
+              is_ingested: false
+              conditional_logic: null
+              config:
+                opportunity__pipeline_id: QN3iL5Y7zyrvDJXFQjPJva
+              group: null
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/custom_field/all:
+    get:
+      operationId: getAllCustomFields
+      summary: Get all custom fields
+      tags:
+      - Custom Fields
+      description: To retrieve all custom fields, remove record_types from the URL.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/custom_field/update_instance:
+    put:
+      operationId: updateACustomFieldInstance
+      summary: Update a custom field instance
+      tags:
+      - Custom Fields
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              record_type: contact
+              record_id: '125246'
+              custom_field_id: '1234'
+              value: Slide like a lizard
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/opportunities:
+    post:
+      operationId: createOpportunity
+      summary: Create Opportunity
+      tags:
+      - Opportunities
+      description: 'We think of an opportunity which could be in serveral possible discreet stages as
+        defined initially.
+
+        Request Body fields
+
+
+        pipeline_id: The uid of the pipline in which this opportunity gets created.
+
+        stage_id: The id of the stage in which this opportunity is created.
+
+        title : Title of the opportunity
+
+        owner : List of user ids (generally emails) for the owners of the opportunities
+
+        customer_id : Customer or Account id for which this opportunity is meant to be
+
+        contact_id: The id of the contact associat'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/opportunities/{opportunity_id}:
+    get:
+      operationId: getOpportunity
+      summary: Get Opportunity
+      tags:
+      - Opportunities
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: opportunity_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    patch:
+      operationId: updateOpportunity
+      summary: Update Opportunity
+      tags:
+      - Opportunities
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: opportunity_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      operationId: deleteOpportunity
+      summary: Delete Opportunity
+      tags:
+      - Opportunities
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: opportunity_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/opportunities/{opportunity_id}/activity_feed:
+    get:
+      operationId: getOpportunityActivityFeed
+      summary: Get Opportunity Activity Feed
+      tags:
+      - Opportunities
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: opportunity_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/opportunities/search:
+    post:
+      operationId: searchOpportunities
+      summary: Search Opportunities
+      tags:
+      - Opportunities
+      description: 'The search route allows users to query opportunities based on various attributes using
+        a structured filtering syntax. Each attribute can be filtered using specific operators that act
+        on the values of the fields within an opportunity. The operators define conditions such as equality,
+        inequality, containment, and comparisons.
+
+        Constructing Queries
+
+        Query Syntax
+
+        Queries are constructed as JSON objects where each key corresponds to an opportunity attribute,
+        and the value is another JSON object specify'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/pipelines/{pipeline_id}/export:
+    post:
+      operationId: exportOpportunities
+      summary: Export Opportunities
+      tags:
+      - Opportunities
+      description: 'The search route allows users to query opportunities based on various attributes using
+        a structured filtering syntax. Each attribute can be filtered using specific operators that act
+        on the values of the fields within an opportunity. The operators define conditions such as equality,
+        inequality, containment, and comparisons.
+
+        Constructing Queries
+
+        Query Syntax
+
+        Queries are constructed as JSON objects where each key corresponds to an opportunity attribute,
+        and the value is another JSON object specify'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/pipelines/{pipeline_id}/metrics:
+    post:
+      operationId: calculatePipelineMetrics
+      summary: Calculate Pipeline Metrics
+      tags:
+      - Opportunities
+      description: 'Given a search query (like the /search endpoint), this API endpoint calculates and
+        returns the total count, total value, and forecasted value of opportunities within a specific
+        pipeline and satisfying the search query. The calculation takes into account the stages of opportunities
+        and their respective probabilities of closing.
+
+
+        Total Count: The aggregate number of opportunities within the pipeline.
+
+        Total Value: The total financial value of the pipeline.
+
+        Forecast Value: A predictive metric estima'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/pipelines/metrics:
+    post:
+      operationId: calculatePipelineMetricsAll
+      summary: Calculate Pipeline Metrics All
+      tags:
+      - Opportunities
+      description: 'Given a search query (like the /search endpoint), this API endpoint calculates and
+        returns the total count, total value, and forecasted value of opportunities for all pipelines
+        and satisfying the search query. The calculation takes into account the stages of opportunities
+        and their respective probabilities of closing. A pipeline_id filter can be added to narrow the
+        results.
+
+
+        Total Count: The aggregate number of opportunities within the pipeline.
+
+
+        Total Value: The total financial value of the pip'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/pipelines/{pipeline_id}/mock_users:
+    get:
+      operationId: getPipelineMockableUsers
+      summary: Get Pipeline Mockable Users
+      tags:
+      - Opportunities
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/customers/{identifier}:
+    get:
+      operationId: getCustomer
+      summary: Get Customer
+      tags:
+      - Customers
+      description: 'Get Customer API v1
+
+        Overview
+
+        The Get Customer API v1 endpoint allows you to retrieve a single customer record by its business
+        identifier or internal UUID. The response returns the full customer record including core fields,
+        billing hierarchy, enriched representative and account group data, custom fields, and analytics.
+        Customers represent the accounts your sales team sells to, including their identifying information,
+        address details, contact info, and classification data.
+
+        Endpoint
+
+        Method: GETURL'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    patch:
+      operationId: updateCustomer
+      summary: Update Customer
+      tags:
+      - Customers
+      description: 'Update Customer API v1
+
+        Overview
+
+        The Update Customer API v1 endpoint allows you to partially update an existing customer record
+        within a specific company. This endpoint uses PATCH semantics — only fields explicitly included
+        in the request body are updated, while omitted fields remain unchanged. Fields sent with a null
+        value are cleared. Customers represent the accounts your sales team sells to, including their
+        identifying information, address details, contact info, and classification data.
+
+        Endpoi'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v2/customers/search:
+    post:
+      operationId: searchCustomersV2
+      summary: Search Customers V2
+      tags:
+      - Customers
+      description: 'Customer Search API v2
+
+        Overview
+
+        The Customer Search API v2 endpoint allows you to search for customers within a specific company
+        using a query string and advanced filtering options. This endpoint supports various search operators
+        for flexible and precise customer searches. Customers represent the accounts your sales team sells
+        to, including their identifying information, address details, contact info, classification data,
+        churn analytics, custom fields, and audit metadata.
+
+        Endpoint
+
+        Method: POSTU'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/customers:
+    post:
+      operationId: createCustomerV1
+      summary: Create Customer V1
+      tags:
+      - Customers
+      description: 'Create Customer API v1
+
+        Overview
+
+        The Create Customer API v1 endpoint allows you to create a new customer record within a specific
+        company. Customers represent the accounts your sales team sells to, including their identifying
+        information, address details, contact info, and classification data. The endpoint validates that
+        the customer_id is unique within the company before creating the record.
+
+        Endpoint
+
+        Method: POSTURL: {{domain}}/{{company}}/v1/customers
+
+        Path Parameters
+
+
+
+
+        Parameter
+
+        Type
+
+        Required
+
+        '
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/customers/bulk:
+    post:
+      operationId: createCustomersBulkV1
+      summary: Create Customers Bulk V1
+      tags:
+      - Customers
+      description: 'Bulk Create Customers API v1
+
+        Overview
+
+        The Bulk Create Customers API v1 endpoint allows you to create multiple customer records in a
+        single request within a specific company. The endpoint processes each item independently — valid
+        items succeed even if others fail, providing per-item error reporting. Customers represent the
+        accounts your sales team sells to, including their identifying information, address details, contact
+        info, and classification data.
+
+        Endpoint
+
+        Method: POST
+
+        URL: {{domain}}/{{comp'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/quotes/{quote_id}:
+    get:
+      operationId: getQuoteV2
+      summary: Get Quote v2
+      tags:
+      - Quotes
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: quote_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    patch:
+      operationId: editQuote
+      summary: Edit Quote
+      tags:
+      - Quotes
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: quote_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              customer_id: cust-0
+              contact_id: cont-0
+              notes: test_notes
+              quote_lines:
+              - interaction_id: 123-00-001-quote
+                product_id: METCAL 123
+                quantity: 3
+                net_price: 196.6
+                list_price: 196.6
+                margin: 25.11
+                quote_status: open
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/quote_headers/{quote_id}:
+    get:
+      operationId: getQuoteHeader
+      summary: Get Quote Header
+      tags:
+      - Quotes
+      description: This endpoint allows clients to fetch detailed quote header information for specified
+        quote IDs within a company. The response includes quote details, associated products, contacts,
+        customer information, and calculated values such as realized and unrealized values.
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: quote_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/quote_headers/search:
+    post:
+      operationId: searchQuotes
+      summary: Search Quotes
+      tags:
+      - Quotes
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/leads/search:
+    post:
+      operationId: searchLeadsV1
+      summary: Search Leads V1
+      tags:
+      - Leads
+      description: "Lead Search API v1\nOverview\nThe Lead Search API v1 endpoint allows you to search\
+        \ for leads within a specific company using a query string and advanced filtering options. This\
+        \ endpoint supports various search operators for flexible and precise lead searches. Leads represent\
+        \ potential customers in your sales pipeline with tracking for stages, sources, and conversion\
+        \ activities.\nEndpoint\nMethod: POSTURL: {{domain}}/{{company}}/v1/leads/search\nRequest Format\n\
+        Request Body Structure\n{\n    \"query\": \"st"
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/leads/stages:
+    get:
+      operationId: getLeadStagesV1
+      summary: Get Lead Stages V1
+      tags:
+      - Leads
+      description: 'Get Lead Stages API v1
+
+        Overview
+
+        The Get Lead Stages API v1 endpoint returns the lead pipeline stages configured for a company,
+        in pipeline order. Each stage carries a stable stage_id, a human-readable stage_name, and a stage_status
+        lifecycle marker. Use a stage''s stage_id as the lead_stage value when creating a lead via POST
+        /v1/leads. If a company has no custom pipeline configured, a default set of stages is returned.
+
+        Endpoint
+
+        Method: GETURL: {{domain}}/{{company}}/v1/leads/stages
+
+        Path Paramete'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/leads:
+    post:
+      operationId: createLeadV1
+      summary: Create Lead V1
+      tags:
+      - Leads
+      description: 'Create Lead API v1
+
+        Overview
+
+        The Create Lead API v1 endpoint allows you to create a new lead within a specific company. A lead
+        represents a prospective account your sales team is pursuing. Creating a lead does several things
+        in one call: the lead appears in the Leads pipeline, a contact is created from the contact fields,
+        and a follow-up task is created for each assigned representative. The endpoint validates that
+        lead_stage is a configured pipeline stage before creating the record.
+
+        Endpoint
+
+        Meth'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/contacts/search:
+    post:
+      operationId: searchContactsV1
+      summary: Search Contacts V1
+      tags:
+      - Contacts
+      description: 'Contact Search API v1
+
+        Overview
+
+        The Contact Search API v1 endpoint allows you to search for contacts within a specific company
+        using a query string and advanced filtering options. This endpoint supports various search operators
+        for flexible and precise contact searches. Contacts represent individual people associated with
+        customers, including their roles, contact information, custom fields, and audit metadata.
+
+        Endpoint
+
+        Method: POSTURL: {{domain}}/{{company}}/v1/contacts/search
+
+        Request Format
+
+        Requ'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/contacts:
+    post:
+      operationId: createContactV1
+      summary: Create Contact V1
+      tags:
+      - Contacts
+      description: 'Contact Create API v1
+
+        Overview
+
+        The Contact Create API v1 endpoint allows you to create a new contact within a specific company.
+        Contacts represent individual people associated with one or more customers, including their roles,
+        contact information, custom fields, and relationship details. This endpoint supports comprehensive
+        contact information including multiple email addresses, phone numbers (with type and extension),
+        custom fields, and multi-customer associations.
+
+        Endpoint
+
+        Method: POSTURL: {{d'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/contacts/{identifier}:
+    get:
+      operationId: getContactV1
+      summary: Get Contact V1
+      tags:
+      - Contacts
+      description: 'Contact Get API v1
+
+        Overview
+
+        The Contact Get API v1 endpoint allows you to retrieve a single contact by its identifier within
+        a specific company. The endpoint returns comprehensive contact information including basic details,
+        contact methods, customer associations, and activity counts (calls, emails, quotes, orders). Contacts
+        represent individual people associated with customers, including their roles, contact information,
+        and relationship details.
+
+        Endpoint
+
+        Method: GETURL: {{domain}}/{{company}}/'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      operationId: editContactV1
+      summary: Edit Contact V1
+      tags:
+      - Contacts
+      description: 'Contact Update API v1
+
+        Overview
+
+        The Contact Update API v1 endpoint allows you to edit an existing contact within a specific company.
+        All editable fields are optional; only the fields you supply are updated, and the request must
+        include at least one editable field. The endpoint also supports re-linking a contact to a different
+        set of customers via customer_ids.
+
+        Endpoint
+
+        Method: PUTURL: {{domain}}/{{company}}/v1/contacts/{identifier}
+
+        Path Parameters
+
+
+
+
+        Parameter
+
+        Type
+
+        Required
+
+        Description
+
+
+
+
+
+        identi'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      operationId: deleteContactV1
+      summary: Delete Contact V1
+      tags:
+      - Contacts
+      description: 'Contact Delete API v1
+
+        Overview
+
+        The Contact Delete API v1 endpoint allows you to permanently delete a contact within a specific
+        company. This endpoint performs a hard delete, physically removing the contact record from the
+        database. The deletion is recorded in the audit trail for compliance and tracking purposes.
+
+        Endpoint
+
+        Method: DELETEURL: {{domain}}/{{company}}/v1/contacts/{{identifier}}
+
+        Request Format
+
+        URL Parameters
+
+
+
+
+        Parameter
+
+        Type
+
+        Required
+
+        Description
+
+
+
+
+
+        company
+
+        string
+
+        Yes
+
+        The company iden'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/call_notes/search:
+    post:
+      operationId: searchCallNotesV1
+      summary: Search Call Notes V1
+      tags:
+      - Call Notes
+      description: 'Call Notes Search API v1
+
+        Overview
+
+        The Call Notes Search API v1 endpoint allows you to search for call notes within a specific company
+        using a query string and advanced filtering options. This endpoint supports various search operators
+        for flexible and precise call note searches. Call notes represent recorded interactions between
+        sales representatives and customers, including notes, pitched products, and associated metadata.
+
+        Endpoint
+
+        Method: POSTURL: {{domain}}/{{company}}/v1/call-notes/search
+
+        Re'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/call_notes:
+    post:
+      operationId: createCallNoteV1
+      summary: Create Call Note V1
+      tags:
+      - Call Notes
+      description: 'Call Note Create API v1
+
+        Overview
+
+        The Call Note Create API v1 endpoint allows you to create a new call note for one or more customers
+        within a specific company. The endpoint accepts call details, optional pitched items (products
+        presented during the call), custom fields, associations (linked entities such as opportunities,
+        quotes, orders, and campaigns), and file attachments. When multiple customers are specified, a
+        separate call note is created for each customer, linked together via a shared cal'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/call_notes/{identifier}:
+    put:
+      operationId: editCallNoteV1
+      summary: Edit Call Note V1
+      tags:
+      - Call Notes
+      description: 'Call Note Edit API v1
+
+        Overview
+
+        The Call Note Edit API v1 endpoint allows you to update an existing call note by its identifier
+        within a specific company. The endpoint accepts updated call details including notes text, call
+        type, tagged users, custom fields, associations, and file attachments. Only the original creator
+        of the call note can edit it. The response returns the updated call note with all current field
+        values.
+
+        Endpoint
+
+        Method: PUT
+
+        URL: {{domain}}/{{company}}/v1/call_notes/{{identifier}'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      operationId: deleteCallNoteV1
+      summary: Delete Call Note V1
+      tags:
+      - Call Notes
+      description: 'Call Note Delete API v1
+
+        Overview
+
+        The Call Note Delete API v1 endpoint allows you to delete an existing call note by its identifier
+        within a specific company. Deleting a call note permanently removes the call note record and all
+        associated pitched items from the database. Associated files are soft-deleted, comments are soft-deleted,
+        and interaction snapshots are created as an audit trail before deletion. Related entities (customers,
+        contacts, opportunities, quotes, orders) have their last contact'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    get:
+      operationId: getCallNoteV1
+      summary: Get Call Note V1
+      tags:
+      - Call Notes
+      description: 'Call Note Get API v1
+
+        Overview
+
+        The Call Note Get API v1 endpoint allows you to retrieve a single call note by its identifier
+        within a specific company. The endpoint returns comprehensive call note information including
+        core call details, tagged users, custom fields, associations (linked entities such as opportunities,
+        quotes, and files), customer information, and pitched items (products presented during the call).
+        Call notes represent logged interactions between sales representatives and customer'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/create/interaction/call_note:
+    post:
+      operationId: createCallNote
+      summary: Create Call Note (LEGACY)
+      tags:
+      - Call Notes
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/edit/task:
+    post:
+      operationId: updateTask
+      summary: Update Task
+      tags:
+      - Tasks
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              task_id: 8e05aaaa-b955-4958-850d-f1b12c2496c9
+              completed: true
+              user_id:
+              - joe.doe@acme.com
+              requesting_user_id: protontestaccount@acme.com
+              title: Test task
+              due_date: '2023-10-15T22:00:00.000Z'
+              note: test
+              associations:
+              - type: customer
+                customer_id: 00531-01
+              - type: product
+                product_id: ABC-123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/create/task:
+    post:
+      operationId: createTask
+      summary: Create Task
+      tags:
+      - Tasks
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/product_initiatives/all:
+    get:
+      operationId: getProductInitiatives
+      summary: Get Product Initiatives
+      tags:
+      - Product Initiatives
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /{company}/v1/search/customer-contact:
+    get:
+      operationId: searchContactByPhoneV1
+      summary: Search Contact by phone V1
+      tags:
+      - Search
+      description: 'Search Customer &amp; Contact by Phone API v1
+
+        Overview
+
+        The Search Customer &amp; Contact API v1 endpoint finds customers and contacts within a company
+        by phone number. It searches both customer records and contact records for the supplied number
+        and returns each match as a customer/contact pair. Results are access-controlled: unless the requesting
+        user has all-access, matches are restricted to the account groups the user belongs to. This endpoint
+        is typically used to identify the account and con'
+      parameters:
+      - name: company
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Acting user id
+      - name: X-Company
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Tenant company slug
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Static API key supplied by Proton at integration onboarding.

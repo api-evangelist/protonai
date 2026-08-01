@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/protonai-openapi.yml (operationIds verified against the spec)
+skills:
+  - file: protonai-product-recommendations.md
+    name: Serve AI product recommendations for a distributor cart
+    api: openapi/protonai-openapi.yml
+    operations: [newRecommendations, completeCartRecommendations, boughtAlsoBought, similarItems, trackProductSearch]
+  - file: protonai-lead-to-opportunity.md
+    name: Capture a lead and open a CRM opportunity
+    api: openapi/protonai-openapi.yml
+    operations: [createLeadV1, createCustomerV1, createContactV1, createOpportunity, createCallNoteV1]

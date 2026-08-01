@@ -1,0 +1,29 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/protonai-openapi.yml
+docs: https://api.proton.ai/
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  notes: >-
+    Auth is a single static API key sent in the X-Api-Key header, supplied by
+    Proton at the start of an integration (no dynamic generation or refresh).
+    Requests are additionally scoped by an X-Company tenant header and an
+    optional X-User-Id acting-user header. There is no OAuth surface.
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-Api-Key
+  description: Static API key supplied by Proton at integration onboarding.
+  sources:
+  - openapi/protonai-openapi.yml
+additional_headers:
+- name: X-Company
+  required: true
+  description: Tenant company slug; also appears as the first path segment (/{company}/...).
+- name: X-User-Id
+  required: false
+  description: Identifies the acting user for attribution on writes and tracking events.

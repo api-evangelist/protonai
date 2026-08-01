@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.proton.ai/ footer + https://status.proton.ai/ + openapi/protonai-openapi.yml
+versioning:
+  scheme: uri-path
+  observed: [v1, v2]
+  docs: https://api.proton.ai/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No published deprecation/Sunset (RFC 8594) policy. One endpoint is labelled
+    LEGACY in the docs (Create Call Note LEGACY, /create/interaction/call_note),
+    superseded by /v1/call_notes.
+sla:
+  url: null
+status_page: https://status.proton.ai/
+deprecated_operations:
+  - openapi/protonai-openapi.yml#createCallNoteLEGACY

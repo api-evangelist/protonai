@@ -1,7 +1,29 @@
 aid: protonai
 name: Proton.ai
-description: Proton.ai is a company surfaced as a portfolio company of battery-ventures and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Proton.ai is an AI industry cloud platform built for B2B distributors, combining an
+  AI-guided CRM, product information management, e-commerce recommendation engine, and
+  order-capture automation on top of a distributor's existing ERP and e-commerce systems.
+  Proton exposes a public REST API (documented via Postman at api.proton.ai) offering an
+  AI-powered suite of endpoints for product recommendations (cart, reorder, similar items,
+  bought-also-bought, recently viewed), behavioral tracking, and CRM operations across
+  customers, contacts, opportunities and pipelines, quotes, leads, call notes, tasks, and
+  tenant-defined custom fields. Authentication is a static API key supplied at onboarding
+  and sent in the X-Api-Key header, with an X-Company tenant header scoping every request.
+  Proton is backed by Battery Ventures and headquartered around a distribution-industry focus.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://content.pstmn.io/9e57cb73-9d7b-4c3a-8915-f860c9e82380/bG9nby0yMDIzLnBuZw==
 url: https://raw.githubusercontent.com/api-evangelist/protonai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,12 +33,339 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- CRM
+- Sales
+- Distribution
+- Artificial Intelligence
+- Recommendations
+- B2B
+- Wholesale Distribution
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: protonai:protonai-call-notes-api
+  name: Proton.ai Call Notes API
+  description: The Call Notes API from Proton.ai — 4 operation(s) for call notes.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Call Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-call-notes-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-contacts-api
+  name: Proton.ai Contacts API
+  description: The Contacts API from Proton.ai — 3 operation(s) for contacts.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-contacts-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-custom-fields-api
+  name: Proton.ai Custom Fields API
+  description: The Custom Fields API from Proton.ai — 5 operation(s) for custom fields.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Custom Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-custom-fields-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-customers-api
+  name: Proton.ai Customers API
+  description: The Customers API from Proton.ai — 4 operation(s) for customers.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-customers-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-leads-api
+  name: Proton.ai Leads API
+  description: The Leads API from Proton.ai — 3 operation(s) for leads.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Leads
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-leads-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-opportunities-api
+  name: Proton.ai Opportunities API
+  description: The Opportunities API from Proton.ai — 8 operation(s) for opportunities.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Opportunities
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-opportunities-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-product-initiatives-api
+  name: Proton.ai Product Initiatives API
+  description: The Product Initiatives API from Proton.ai — 1 operation(s) for product initiatives.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Product Initiatives
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-product-initiatives-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-quotes-api
+  name: Proton.ai Quotes API
+  description: The Quotes API from Proton.ai — 3 operation(s) for quotes.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-quotes-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-recommendations-api
+  name: Proton.ai Recommendations API
+  description: The Recommendations API from Proton.ai — 7 operation(s) for recommendations.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Recommendations
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-recommendations-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-search-api
+  name: Proton.ai Search API
+  description: The Search API from Proton.ai — 1 operation(s) for search.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-search-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-tasks-api
+  name: Proton.ai Tasks API
+  description: The Tasks API from Proton.ai — 2 operation(s) for tasks.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-tasks-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+- aid: protonai:protonai-tracking-api
+  name: Proton.ai Tracking API
+  description: The Tracking API from Proton.ai — 2 operation(s) for tracking.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Tracking
+  properties:
+  - type: OpenAPI
+    url: openapi/protonai-tracking-api-openapi.yml
+  - type: Authentication
+    url: authentication/protonai-authentication.yml
+  - type: Conventions
+    url: conventions/protonai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/protonai-problem-types.yml
+  - type: DataModel
+    url: data-model/protonai-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/protonai-lifecycle.yml
+  - type: Conformance
+    url: conformance/protonai-conformance.yml
+  - type: LLMsTxt
+    url: llms/protonai-llms.txt
+common:
+- type: DomainSecurity
+  url: security/protonai-domain-security.yml
+- type: Authentication
+  url: authentication/protonai-authentication.yml
+- type: TrustCenter
+  url: security/protonai-trust-center.yml
+- type: Website
+  url: https://www.proton.ai/
+- type: Documentation
+  url: https://api.proton.ai/
+- type: APIReference
+  url: https://api.proton.ai/
+- type: Postman
+  url: https://api.proton.ai/
+- type: StatusPage
+  url: https://status.proton.ai/
+- type: Support
+  url: https://help.proton.ai/
+- type: Blog
+  url: https://www.proton.ai/blog
+- type: SignUp
+  url: https://www.proton.ai/demo
+- type: TermsOfService
+  url: https://www.proton.ai/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.proton.ai/privacy-policy
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1

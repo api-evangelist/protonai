@@ -1,0 +1,36 @@
+{
+  "provider": "protonai",
+  "sources": [
+    "protonai-call-notes-api-openapi.yml",
+    "protonai-contacts-api-openapi.yml",
+    "protonai-custom-fields-api-openapi.yml",
+    "protonai-customers-api-openapi.yml",
+    "protonai-leads-api-openapi.yml",
+    "protonai-opportunities-api-openapi.yml",
+    "protonai-product-initiatives-api-openapi.yml",
+    "protonai-quotes-api-openapi.yml",
+    "protonai-recommendations-api-openapi.yml",
+    "protonai-search-api-openapi.yml",
+    "protonai-tasks-api-openapi.yml",
+    "protonai-tracking-api-openapi.yml"
+  ],
+  "outputs": [
+    "protonai-call-notes-api-openapi.yml",
+    "protonai-contacts-api-openapi.yml",
+    "protonai-custom-fields-api-openapi.yml",
+    "protonai-customers-api-openapi.yml",
+    "protonai-leads-api-openapi.yml",
+    "protonai-opportunities-api-openapi.yml",
+    "protonai-product-initiatives-api-openapi.yml",
+    "protonai-quotes-api-openapi.yml",
+    "protonai-recommendations-api-openapi.yml",
+    "protonai-search-api-openapi.yml",
+    "protonai-tasks-api-openapi.yml",
+    "protonai-tracking-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

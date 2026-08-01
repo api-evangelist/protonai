@@ -1,0 +1,42 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/protonai-openapi.yml + https://api.proton.ai/ Postman documentation
+authentication:
+  style: static-api-key
+  header: X-Api-Key
+  tenant_header: X-Company
+  actor_header: X-User-Id
+  see: authentication/protonai-authentication.yml
+base_url: https://api.proton.ai
+tenancy:
+  model: path-and-header
+  note: >-
+    Every resource path is prefixed with the tenant company slug
+    (/{company}/...) and the same value is sent in the X-Company header.
+versioning:
+  style: uri-path
+  observed: [v1, v2]
+  note: >-
+    Version is embedded in the path on newer resources (e.g. /v1/customers,
+    /v2/customers/search). Recommendation, tracking, opportunity, quote and task
+    endpoints are unversioned. No global version policy is published.
+idempotency:
+  supported: false
+  note: No Idempotency-Key header or idempotent-retry contract is documented.
+pagination:
+  style: page-count
+  params: [count, page]
+  note: >-
+    List/recommendation endpoints accept count (page size) and, on some, page.
+    Search endpoints (POST .../search) take filter bodies. No cursor tokens or
+    standard pagination response envelope are documented.
+search:
+  style: post-body
+  note: Retrieval-by-filter is exposed as POST .../search on most collections (customers, contacts, leads, quotes, opportunities, call notes).
+error_envelope:
+  shape: '{ "status_message": "SUCCESS|<error>", "data": { ... } }'
+  see: errors/protonai-problem-types.yml
+rate_limiting:
+  documented: false
+custom_fields:
+  note: Tenant-defined custom fields are managed via /custom_field/* and attached to customer/contact records.

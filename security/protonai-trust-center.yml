@@ -1,0 +1,17 @@
+generated: '2026-07-20'
+method: searched
+probe: false
+source: https://www.proton.ai/ footer "Trust Center" link
+url: https://app.drata.com/trust/9cc1c9d9-0c38-11ee-865f-029d78a187d9
+platform: Drata
+certifications: []
+note: >-
+  Proton.ai publishes a Drata-hosted Trust Center (linked from the site footer).
+  The portal is access-gated (HTTP 403 to anonymous fetch), so specific
+  certifications could not be verified and are intentionally left empty rather
+  than assumed. No Compliance pointer is emitted because no certification was
+  independently confirmed.
+evidence:
+  - source: https://www.proton.ai/
+    kind: footer-link
+    detail: Trust Center link to app.drata.com/trust/...

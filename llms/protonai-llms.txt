@@ -1,0 +1,22 @@
+# Proton.ai
+
+> Proton is an AI industry cloud platform built for B2B distributors. Its REST API exposes AI product recommendations (cart, reorder, similar, bought-also-bought, recently-viewed), behavioral tracking, and CRM operations across customers, contacts, opportunities/pipelines, quotes, leads, call notes, tasks, and custom fields. Authentication is a static API key in the X-Api-Key header plus an X-Company tenant header.
+
+## APIs
+- [Proton API documentation](https://api.proton.ai/): Public Postman documentation for the AI recommendation + CRM REST API (56 operations).
+- [Proton API (OpenAPI, API Evangelist derived)](https://raw.githubusercontent.com/api-evangelist/protonai/refs/heads/main/openapi/protonai-openapi.yml): OpenAPI 3.1 derived from the published Postman collection.
+
+## Product
+- [How Proton Works](https://www.proton.ai/how-it-works): AI platform for distributors overview.
+- [CRM overview](https://www.proton.ai/crm-overview): AI-guided CRM for distributor sales teams.
+- [Blog](https://www.proton.ai/blog): Distribution sales and technology articles.
+
+## Docs & Support
+- [Help Center](https://help.proton.ai/): Product help and support articles.
+- [Status](https://status.proton.ai/): Service status page.
+- [Contact / Demo](https://www.proton.ai/demo): Request a demo / sign up.
+
+## Trust
+- [Trust Center](https://app.drata.com/trust/9cc1c9d9-0c38-11ee-865f-029d78a187d9): Drata-hosted security and compliance portal.
+- [Terms of Use](https://www.proton.ai/terms-of-use)
+- [Privacy Policy](https://www.proton.ai/privacy-policy)
