@@ -338,6 +338,10 @@ apis:
   - type: LLMsTxt
     url: llms/protonai-llms.txt
 common:
+- type: AgentSkill
+  url: skills/protonai-lead-to-opportunity.md
+- type: MCPServer
+  url: mcp/protonai-mcp.yml
 - type: DomainSecurity
   url: security/protonai-domain-security.yml
 - type: Authentication
