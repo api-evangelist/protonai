@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Proton Call Notes Custom Fields API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add new custom field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/custom_field/create",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "field_id is optional. If left out, the system will generate a globally unique field_id for you."
+        },
+        {
+          "info": {
+            "name": "Delete a custom field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/custom_field/delete",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete a custom field"
+        },
+        {
+          "info": {
+            "name": "Edit a custom field configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.proton.ai/:company/custom_field/edit",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "field_id is required. Every other parameter is optional*.\n*If you change the custom field's type to dropdown, then options will also be a required parameter."
+        },
+        {
+          "info": {
+            "name": "Get all custom fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/custom_field/all",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "To retrieve all custom fields, remove record_types from the URL."
+        },
+        {
+          "info": {
+            "name": "Update a custom field instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.proton.ai/:company/custom_field/update_instance",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a custom field instance"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

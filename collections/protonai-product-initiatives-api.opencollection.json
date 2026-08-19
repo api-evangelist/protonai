@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Proton Call Notes Product Initiatives API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product Initiatives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Product Initiatives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/product_initiatives/all",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Product Initiatives"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

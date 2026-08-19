@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Proton Call Notes Tasks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/edit/task",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Task"
+        },
+        {
+          "info": {
+            "name": "Create Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/create/task",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create Task"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

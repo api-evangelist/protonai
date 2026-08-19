@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Proton Call Notes Recommendations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recommendations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "(Light) Complete Cart Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/product/recommendations/cart_lite",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This is a different flavor of the same API as the other Complete Cart but the cart is inferred through tracking data. The API only supplies the identifier of the customer and Proton infers the cart based on the items that have been to track in the past 24h.\nUsage is only suggested for use-cases where the explicit cart is not possible to fetch."
+        },
+        {
+          "info": {
+            "name": "Reorder Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/product/recommendations/periodic",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Recommends products this customer has purchased before and is due to order again. Proton uses purchasing patterns to prioritize products that the customer is most likely to reorder."
+        },
+        {
+          "info": {
+            "name": "New Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/product/recommendations",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Recommends products this customer hasn’t ordered before (or recently) that could be a good fit for them. Proton looks at products purchased by similar customers to make these recommendations."
+        },
+        {
+          "info": {
+            "name": "Bought Also Bought",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/product/recommendations/bought",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Recommends products that are often bought together with the input product. \"People that Buy X also Buy Y\""
+        },
+        {
+          "info": {
+            "name": "Similar Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/product/recommendations/similar",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Recommends products that are similar to the input product. Proton uses Natural Language Processing (NLP) to match products that contain similar name, descriptions, specifications etc."
+        },
+        {
+          "info": {
+            "name": "Recently Viewed Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/product/recommendations/recent",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Shows products that the account has recently visited. This recommendation is powered through the Track - Product View Tracking API. No logic/AI is involved in this recommendation."
+        },
+        {
+          "info": {
+            "name": "Complete Cart Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/product/recommendations/cart",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recommends items that fit the cart. The model works by looking at all historical \"carts\" (based on order history) and tries to predict what products are \"missing\" from the current user's cart.\nRequest Body definition (JSON)\n\n\n\nName\nDescription\n\n\n\n\ncustomer_id\n{{customer_id_description}}\n\n\nuser_id\n{{user_id_description}}\n\n\ncount\n{{count_description}}\n\n\nproducts\nAn array of product objects with product_id and quantity that describes the list of products the user has in their cart."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

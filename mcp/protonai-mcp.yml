@@ -288,3 +288,9 @@ tools:
   source_operation: openapi/protonai-openapi.yml#searchContactByPhoneV1
   method: GET
   group: Search
+deployment:
+  mode: none
+  verified: derived
+  tools: 56
+  checked: '2026-08-12'
+  source: catalog MCP census

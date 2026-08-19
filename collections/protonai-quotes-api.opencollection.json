@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Proton Call Notes Quotes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Quote v2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/quotes/:quote_id",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Quote v2"
+        },
+        {
+          "info": {
+            "name": "Edit Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.proton.ai/:company/quotes/:quote_id",
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Quote"
+        },
+        {
+          "info": {
+            "name": "Get Quote Header",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/quote_headers/:quote_id",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint allows clients to fetch detailed quote header information for specified quote IDs within a company. The response includes quote details, associated products, contacts, customer information, and calculated values such as realized and unrealized values."
+        },
+        {
+          "info": {
+            "name": "Search Quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/quote_headers/search",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search Quotes"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

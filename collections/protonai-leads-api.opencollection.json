@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Proton Call Notes Leads API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Leads V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/v1/leads/search",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lead Search API v1\nOverview\nThe Lead Search API v1 endpoint allows you to search for leads within a specific company using a query string and advanced filtering options. This endpoint supports various search operators for flexible and precise lead searches. Leads represent potential customers in your sales pipeline with tracking for stages, sources, and conversion activities.\nEndpoint\nMethod: POSTURL: {{domain}}/{{company}}/v1/leads/search\nRequest Format\nRequest Body Structure\n{\n    \"query\": \"st"
+        },
+        {
+          "info": {
+            "name": "Get Lead Stages V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/v1/leads/stages",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Lead Stages API v1\nOverview\nThe Get Lead Stages API v1 endpoint returns the lead pipeline stages configured for a company, in pipeline order. Each stage carries a stable stage_id, a human-readable stage_name, and a stage_status lifecycle marker. Use a stage's stage_id as the lead_stage value when creating a lead via POST /v1/leads. If a company has no custom pipeline configured, a default set of stages is returned.\nEndpoint\nMethod: GETURL: {{domain}}/{{company}}/v1/leads/stages\nPath Paramete"
+        },
+        {
+          "info": {
+            "name": "Create Lead V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/v1/leads",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create Lead API v1\nOverview\nThe Create Lead API v1 endpoint allows you to create a new lead within a specific company. A lead represents a prospective account your sales team is pursuing. Creating a lead does several things in one call: the lead appears in the Leads pipeline, a contact is created from the contact fields, and a follow-up task is created for each assigned representative. The endpoint validates that lead_stage is a configured pipeline stage before creating the record.\nEndpoint\nMeth"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

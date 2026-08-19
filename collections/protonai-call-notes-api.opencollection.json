@@ -1,0 +1,209 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Proton Call Notes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Call Notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Call Notes V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/v1/call_notes/search",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Call Notes Search API v1\nOverview\nThe Call Notes Search API v1 endpoint allows you to search for call notes within a specific company using a query string and advanced filtering options. This endpoint supports various search operators for flexible and precise call note searches. Call notes represent recorded interactions between sales representatives and customers, including notes, pitched products, and associated metadata.\nEndpoint\nMethod: POSTURL: {{domain}}/{{company}}/v1/call-notes/search\nRe"
+        },
+        {
+          "info": {
+            "name": "Create Call Note V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/v1/call_notes",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Call Note Create API v1\nOverview\nThe Call Note Create API v1 endpoint allows you to create a new call note for one or more customers within a specific company. The endpoint accepts call details, optional pitched items (products presented during the call), custom fields, associations (linked entities such as opportunities, quotes, orders, and campaigns), and file attachments. When multiple customers are specified, a separate call note is created for each customer, linked together via a shared cal"
+        },
+        {
+          "info": {
+            "name": "Get Call Note V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/v1/call_notes/:identifier",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Call Note Get API v1\nOverview\nThe Call Note Get API v1 endpoint allows you to retrieve a single call note by its identifier within a specific company. The endpoint returns comprehensive call note information including core call details, tagged users, custom fields, associations (linked entities such as opportunities, quotes, and files), customer information, and pitched items (products presented during the call). Call notes represent logged interactions between sales representatives and customer"
+        },
+        {
+          "info": {
+            "name": "Edit Call Note V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.proton.ai/:company/v1/call_notes/:identifier",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Call Note Edit API v1\nOverview\nThe Call Note Edit API v1 endpoint allows you to update an existing call note by its identifier within a specific company. The endpoint accepts updated call details including notes text, call type, tagged users, custom fields, associations, and file attachments. Only the original creator of the call note can edit it. The response returns the updated call note with all current field values.\nEndpoint\nMethod: PUT\nURL: {{domain}}/{{company}}/v1/call_notes/{{identifier}"
+        },
+        {
+          "info": {
+            "name": "Delete Call Note V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.proton.ai/:company/v1/call_notes/:identifier",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Call Note Delete API v1\nOverview\nThe Call Note Delete API v1 endpoint allows you to delete an existing call note by its identifier within a specific company. Deleting a call note permanently removes the call note record and all associated pitched items from the database. Associated files are soft-deleted, comments are soft-deleted, and interaction snapshots are created as an audit trail before deletion. Related entities (customers, contacts, opportunities, quotes, orders) have their last contact"
+        },
+        {
+          "info": {
+            "name": "Create Call Note (LEGACY)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/create/interaction/call_note",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create Call Note (LEGACY)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

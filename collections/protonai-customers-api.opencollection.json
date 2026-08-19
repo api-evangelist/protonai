@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Proton Call Notes Customers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/v1/customers/:identifier",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Customer API v1\nOverview\nThe Get Customer API v1 endpoint allows you to retrieve a single customer record by its business identifier or internal UUID. The response returns the full customer record including core fields, billing hierarchy, enriched representative and account group data, custom fields, and analytics. Customers represent the accounts your sales team sells to, including their identifying information, address details, contact info, and classification data.\nEndpoint\nMethod: GETURL"
+        },
+        {
+          "info": {
+            "name": "Update Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.proton.ai/:company/v1/customers/:identifier",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update Customer API v1\nOverview\nThe Update Customer API v1 endpoint allows you to partially update an existing customer record within a specific company. This endpoint uses PATCH semantics — only fields explicitly included in the request body are updated, while omitted fields remain unchanged. Fields sent with a null value are cleared. Customers represent the accounts your sales team sells to, including their identifying information, address details, contact info, and classification data.\nEndpoi"
+        },
+        {
+          "info": {
+            "name": "Search Customers V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/v2/customers/search",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Customer Search API v2\nOverview\nThe Customer Search API v2 endpoint allows you to search for customers within a specific company using a query string and advanced filtering options. This endpoint supports various search operators for flexible and precise customer searches. Customers represent the accounts your sales team sells to, including their identifying information, address details, contact info, classification data, churn analytics, custom fields, and audit metadata.\nEndpoint\nMethod: POSTU"
+        },
+        {
+          "info": {
+            "name": "Create Customer V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/v1/customers",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create Customer API v1\nOverview\nThe Create Customer API v1 endpoint allows you to create a new customer record within a specific company. Customers represent the accounts your sales team sells to, including their identifying information, address details, contact info, and classification data. The endpoint validates that the customer_id is unique within the company before creating the record.\nEndpoint\nMethod: POSTURL: {{domain}}/{{company}}/v1/customers\nPath Parameters\n\n\n\nParameter\nType\nRequired\n"
+        },
+        {
+          "info": {
+            "name": "Create Customers Bulk V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.proton.ai/:company/v1/customers/bulk",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Bulk Create Customers API v1\nOverview\nThe Bulk Create Customers API v1 endpoint allows you to create multiple customer records in a single request within a specific company. The endpoint processes each item independently — valid items succeed even if others fail, providing per-item error reporting. Customers represent the accounts your sales team sells to, including their identifying information, address details, contact info, and classification data.\nEndpoint\nMethod: POST\nURL: {{domain}}/{{comp"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Proton Call Notes Search API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Contact by phone V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.proton.ai/:company/v1/search/customer-contact",
+            "headers": [
+              {
+                "name": "X-User-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Company",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Search Customer &amp; Contact by Phone API v1\nOverview\nThe Search Customer &amp; Contact API v1 endpoint finds customers and contacts within a company by phone number. It searches both customer records and contact records for the supplied number and returns each match as a customer/contact pair. Results are access-controlled: unless the requesting user has all-access, matches are restricted to the account groups the user belongs to. This endpoint is typically used to identify the account and con"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
