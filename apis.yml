@@ -295,6 +295,8 @@ apis:
   humanURL: https://api.proton.ai/
   baseURL: https://api.proton.ai
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
