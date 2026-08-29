@@ -352,6 +352,9 @@ apis:
   - type: LLMsTxt
     url: llms/protonai-llms.txt
 common:
+- type: CapabilityMap
+  url: capabilities/protonai-capability-edges.yml
+  name: Proton.ai Business Capability Map
 - type: AgentSkill
   url: skills/protonai-lead-to-opportunity.md
 - type: MCPServer
