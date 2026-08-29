@@ -11,6 +11,18 @@ description: >-
   tenant-defined custom fields. Authentication is a static API key supplied at onboarding
   and sent in the X-Api-Key header, with an X-Company tenant header scoping every request.
   Proton is backed by Battery Ventures and headquartered around a distribution-industry focus.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
