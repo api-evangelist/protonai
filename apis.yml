@@ -25,15 +25,16 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: unknown
-  onboarding: self-serve
+  onboarding: unknown
   trial: false
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Unknown
+  confidence: low
   source:
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://content.pstmn.io/9e57cb73-9d7b-4c3a-8915-f860c9e82380/bG9nby0yMDIzLnBuZw==
 url: https://raw.githubusercontent.com/api-evangelist/protonai/refs/heads/main/apis.yml
@@ -357,8 +358,9 @@ common:
   name: Proton.ai Business Capability Map
 - type: AgentSkill
   url: skills/protonai-lead-to-opportunity.md
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/protonai-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: DomainSecurity
   url: security/protonai-domain-security.yml
 - type: Authentication
