@@ -1,16 +1,6 @@
 aid: protonai
 name: Proton.ai
-description: >-
-  Proton.ai is an AI industry cloud platform built for B2B distributors, combining an
-  AI-guided CRM, product information management, e-commerce recommendation engine, and
-  order-capture automation on top of a distributor's existing ERP and e-commerce systems.
-  Proton exposes a public REST API (documented via Postman at api.proton.ai) offering an
-  AI-powered suite of endpoints for product recommendations (cart, reorder, similar items,
-  bought-also-bought, recently viewed), behavioral tracking, and CRM operations across
-  customers, contacts, opportunities and pipelines, quotes, leads, call notes, tasks, and
-  tenant-defined custom fields. Authentication is a static API key supplied at onboarding
-  and sent in the X-Api-Key header, with an X-Company tenant header scoping every request.
-  Proton is backed by Battery Ventures and headquartered around a distribution-industry focus.
+description: Proton.ai is an AI industry cloud platform built for B2B distributors, combining an AI-guided CRM, product information management, e-commerce recommendation engine, and order-capture automation on top of a distributor's existing ERP and e-commerce systems. Proton exposes a public REST API (documented via Postman at api.proton.ai) offering an AI-powered suite of endpoints for product recommendations (cart, reorder, similar items, bought-also-bought, recently viewed), behavioral tracking, and CRM operations across customers, contacts, opportunities and pipelines, quotes, leads, call notes, tasks, and tenant-defined custom fields. Authentication is a static API key supplied at onboarding and sent in the X-Api-Key header, with an X-Company tenant header scoping every request. Proton is backed by Battery Ventures and headquartered around a distribution-industry focus.
 deliveryModel:
   model: saas
   open_source: false
@@ -352,6 +342,21 @@ apis:
     url: conformance/protonai-conformance.yml
   - type: LLMsTxt
     url: llms/protonai-llms.txt
+- name: Proton API
+  description: AI REST API returning product recommendations and performing actions in the Proton.ai distributor platform. Authenticated with a static API key in the request header. Documented as a public Postman collection at api.proton.ai.
+  humanURL: https://api.proton.ai/
+  baseURL: https://api.proton.ai
+  tags:
+  - Artificial Intelligence
+  - Recommendations
+  - Distribution
+  properties:
+  - type: APIReference
+    url: https://api.proton.ai/
+  - type: Postman
+    url: https://api.proton.ai/
+  - type: Authentication
+    url: authentication/proton-authentication.yml
 common:
 - type: CapabilityMap
   url: capabilities/protonai-capability-edges.yml
