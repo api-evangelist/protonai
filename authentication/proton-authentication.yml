@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: searched
+source: https://api.proton.ai/
+docs: https://api.proton.ai/
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  oauth2_flows: []
+  notes: >-
+    Proton.ai documents a static API key passed in the request header. Per the published
+    documentation the key is issued at the start of an integration and does not need to be
+    dynamically generated or refreshed. The exact header parameter name is not disclosed in
+    the public Postman documentation, so it is not recorded here to avoid fabrication.
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  static: true
+  sources:
+  - https://api.proton.ai/

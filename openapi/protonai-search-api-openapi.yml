@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Proton Call Notes Search API
+  title: Proton Search API
   version: 1.0.0
   description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
   contact:
@@ -20,11 +20,11 @@ paths:
       summary: Search Contact by phone V1
       tags:
       - Search
-      description: 'Search Customer &amp; Contact by Phone API v1
+      description: 'Search Customer & Contact by Phone API v1
 
         Overview
 
-        The Search Customer &amp; Contact API v1 endpoint finds customers and contacts within a company by phone number. It searches both customer records and contact records for the supplied number and returns each match as a customer/contact pair. Results are access-controlled: unless the requesting user has all-access, matches are restricted to the account groups the user belongs to. This endpoint is typically used to identify the account and con'
+        The Search Customer & Contact API v1 endpoint finds customers and contacts within a company by phone number. It searches both customer records and contact records for the supplied number and returns each match as a customer/contact pair. Results are access-controlled: unless the requesting user has all-access, matches are restricted to the account groups the user belongs to. This endpoint is typically used to identify the account and con'
       parameters:
       - name: company
         in: path

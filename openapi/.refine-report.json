@@ -1,18 +1,7 @@
 {
   "provider": "protonai",
   "sources": [
-    "protonai-call-notes-api-openapi.yml",
-    "protonai-contacts-api-openapi.yml",
-    "protonai-custom-fields-api-openapi.yml",
-    "protonai-customers-api-openapi.yml",
-    "protonai-leads-api-openapi.yml",
-    "protonai-opportunities-api-openapi.yml",
-    "protonai-product-initiatives-api-openapi.yml",
-    "protonai-quotes-api-openapi.yml",
-    "protonai-recommendations-api-openapi.yml",
-    "protonai-search-api-openapi.yml",
-    "protonai-tasks-api-openapi.yml",
-    "protonai-tracking-api-openapi.yml"
+    "_original/protonai-openapi.yml"
   ],
   "outputs": [
     "protonai-call-notes-api-openapi.yml",
@@ -31,6 +20,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "protonai-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "protonai-call-notes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-custom-fields-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-leads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-opportunities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-product-initiatives-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-quotes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-recommendations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "protonai-tracking-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

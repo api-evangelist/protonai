@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Proton Call Notes Leads API
+  title: Proton Leads API
   version: 1.0.0
   description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
   contact:
@@ -20,7 +20,23 @@ paths:
       summary: Search Leads V1
       tags:
       - Leads
-      description: "Lead Search API v1\nOverview\nThe Lead Search API v1 endpoint allows you to search for leads within a specific company using a query string and advanced filtering options. This endpoint supports various search operators for flexible and precise lead searches. Leads represent potential customers in your sales pipeline with tracking for stages, sources, and conversion activities.\nEndpoint\nMethod: POSTURL: {{domain}}/{{company}}/v1/leads/search\nRequest Format\nRequest Body Structure\n{\n    \"query\": \"st"
+      description: 'Lead Search API v1
+
+        Overview
+
+        The Lead Search API v1 endpoint allows you to search for leads within a specific company using a query string and advanced filtering options. This endpoint supports various search operators for flexible and precise lead searches. Leads represent potential customers in your sales pipeline with tracking for stages, sources, and conversion activities.
+
+        Endpoint
+
+        Method: POSTURL: {{domain}}/{{company}}/v1/leads/search
+
+        Request Format
+
+        Request Body Structure
+
+        {
+
+        "query": "st'
       parameters:
       - name: company
         in: path

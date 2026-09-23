@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Proton Call Notes Customers API
+  title: Proton Customers API
   version: 1.0.0
   description: The Proton API is an AI-powered suite of REST endpoints for product recommendations and CRM actions (customers, contacts, opportunities, quotes, leads, call notes, tasks, tracking) for B2B distributors. Requests require a static API key in the X-Api-Key header, supplied by Proton at the start of an integration. Derived by API Evangelist from the provider's published public Postman documentation at https://api.proton.ai/.
   contact:
@@ -160,15 +160,11 @@ paths:
         Path Parameters
 
 
-
-
         Parameter
 
         Type
 
-        Required
-
-        '
+        Required'
       parameters:
       - name: company
         in: path
